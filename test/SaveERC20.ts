@@ -1,11 +1,12 @@
 import {
     loadFixture,
   } from "@nomicfoundation/hardhat-toolbox/network-helpers";
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
-//import { ethers } from 'ethers';
-// import { ethers } from "hardhat";
-// import { expect } from "chai";
+// const { expect } = require("chai");
+// const { ethers } = require("hardhat");
+import { ethers } from "hardhat";
+import { expect } from "chai";
+const { parseEther } = require("ethers/lib/utils");
+
 
 
 
@@ -27,7 +28,7 @@ describe("SaveERC20", function() {
   }
 
   it("Should deposit tokens successfully", async function() {
-    const depositAmount = ethers.utils.parseEther("100");
+    const depositAmount = parseEther("100");
     const { saveERC20, owner } = await loadFixture(deploySaveERC20);
     await expect(saveERC20.deposit(depositAmount))
       .to.emit(saveERC20, "SavingSuccessful")
@@ -35,8 +36,8 @@ describe("SaveERC20", function() {
   });
 
   it("Should withdraw tokens successfully", async function() {
-    const depositAmount = ethers.utils.parseEther("100");
-    const withdrawAmount = ethers.utils.parseEther("50");
+    const depositAmount = parseEther("100");
+    const withdrawAmount = parseEther("50");
     const { saveERC20, owner } = await loadFixture(deploySaveERC20);
 
     await saveERC20.deposit(depositAmount);
@@ -47,7 +48,7 @@ describe("SaveERC20", function() {
   });
 
   it("Should check user balance correctly", async function() {
-    const depositAmount = ethers.utils.parseEther("100");
+    const depositAmount = parseEther("100");
     const { saveERC20, owner } = await loadFixture(deploySaveERC20);
 
     await saveERC20.deposit(depositAmount);
@@ -57,7 +58,7 @@ describe("SaveERC20", function() {
   });
 
   it("Should check contract balance correctly", async function() {
-    const depositAmount = ethers.utils.parseEther("100");
+    const depositAmount = parseEther("100");
     const { saveERC20, owner } = await loadFixture(deploySaveERC20);
 
     await saveERC20.deposit(depositAmount);
@@ -67,8 +68,8 @@ describe("SaveERC20", function() {
   });
 
   it("Should allow owner to withdraw tokens", async function() {
-    const depositAmount = ethers.utils.parseEther("100");
-    const withdrawAmount = ethers.utils.parseEther("50");
+    const depositAmount = parseEther("100");
+    const withdrawAmount = parseEther("50");
     const { saveERC20, owner } = await loadFixture(deploySaveERC20);
 
     await saveERC20.deposit(depositAmount);
