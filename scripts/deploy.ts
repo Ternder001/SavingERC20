@@ -9,10 +9,10 @@ async function main() {
   const savingTokenAddress = "<YOUR_ERC20_TOKEN_ADDRESS>"; // Replace with your ERC20 token address
   const saveERC20 = await SaveERC20.deploy(savingTokenAddress);
 
-  await saveERC20.deployed();
+  await saveERC20.waitForDeployment();
 
   console.log(
-    `SaveERC20 deployed with saving token address ${savingTokenAddress} at address: ${saveERC20.address}`
+    `SaveERC20 deployed with saving token address ${savingTokenAddress} at address: ${saveERC20.target}`
   );
 }
 
